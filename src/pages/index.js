@@ -7,29 +7,29 @@ export default function Home() {
   const [search, setSearch] = useState("");
 
   const addTask = () => {
-    const text = prompt("Enter task:");
+    const text = prompt("Enter a cute task 💖:");
     if (!text?.trim()) return;
     setTasks([...tasks, { text, done: false }]);
   };
 
   const toggleDone = (i) => {
-    const copy = [...tasks];
-    copy[i].done = !copy[i].done;
-    setTasks(copy);
+    const list = [...tasks];
+    list[i].done = !list[i].done;
+    setTasks(list);
   };
 
   const editTask = (i) => {
     const newText = prompt("Edit task:", tasks[i].text);
     if (!newText?.trim()) return;
-    const copy = [...tasks];
-    copy[i].text = newText;
-    setTasks(copy);
+    const list = [...tasks];
+    list[i].text = newText;
+    setTasks(list);
   };
 
   const deleteTask = (i) => {
-    const copy = [...tasks];
-    copy.splice(i, 1);
-    setTasks(copy);
+    const list = [...tasks];
+    list.splice(i, 1);
+    setTasks(list);
   };
 
   const filteredTasks = tasks.filter((task) => {
@@ -41,14 +41,14 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <h1>Simple To-Do App</h1>
+      <h1 className={styles.title}>🌸 Cute To-Do App 🌸</h1>
 
       <input
+        className={styles.search}
         type="text"
-        placeholder="Search..."
+        placeholder="Search tasks… 💭"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className={styles.search}
       />
 
       <div className={styles.tabs}>
@@ -58,21 +58,21 @@ export default function Home() {
       </div>
 
       {filteredTasks.map((task, i) => (
-        <div key={i} className={styles.task}>
+        <div key={i} className={`${styles.task} ${styles.fadeIn}`}>
           <span className={task.done ? styles.done : ""}>{task.text}</span>
 
-          <div>
+          <div className={styles.buttons}>
             <button onClick={() => toggleDone(i)}>✓</button>
-            <button onClick={() => editTask(i)}>Edit</button>
+            <button onClick={() => editTask(i)}>✏️</button>
             <button className={styles.delete} onClick={() => deleteTask(i)}>
-              X
+              ❌
             </button>
           </div>
         </div>
       ))}
 
-      <button className={styles.addBtn} onClick={addTask}>
-        Add Task
+      <button className={`${styles.addBtn} ${styles.bounce}`} onClick={addTask}>
+        ➕ Add Cute Task
       </button>
     </div>
   );
